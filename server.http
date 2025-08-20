@@ -1,0 +1,13 @@
+### Add a new school
+POST http://localhost:5000/addSchool
+Content-Type: application/json
+
+{
+  "name": "Greenwood High",
+  "address": "123 Main Street",
+  "latitude": 12.9716,
+  "longitude": 77.5946
+}
+
+### List schools near a location
+GET http://localhost:5000/listSchools?latitude=12.9716&longitude=77.5946
