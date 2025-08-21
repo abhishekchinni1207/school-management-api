@@ -1,7 +1,17 @@
-// controllers/schoolController.js
-const pool = require('../db');
+const pool = require("../db");
 
-// Create school
+// GET all schools
+exports.getSchools = async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM schools");
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+// CREATE new school
 exports.createSchool = async (req, res) => {
   try {
     const { name, address } = req.body;
@@ -11,16 +21,7 @@ exports.createSchool = async (req, res) => {
     );
     res.json(result.rows[0]);
   } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-// Get all schools
-exports.getSchools = async (req, res) => {
-  try {
-    const result = await pool.query("SELECT * FROM schools");
-    res.json(result.rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
   }
 };
